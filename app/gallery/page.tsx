@@ -10,9 +10,9 @@ const galleryItems = [
     date: "November 2024",
     images: [
       { url: "/conference-keynote-speaker.jpg", alt: "Keynote speaker" },
-      { url: "/conference-networking.jpg", alt: "Networking session" },
-      { url: "/conference-panel-discussion.jpg", alt: "Panel discussion" },
-      { url: "/conference-attendees.jpg", alt: "Conference attendees" },
+      { url: "/ep2.jpg", alt: "Networking session" },
+      { url: "/ep3.jpg", alt: "Panel discussion" },
+      { url: "/ep6.jpg", alt: "Conference attendees" },
     ],
   },
   {
