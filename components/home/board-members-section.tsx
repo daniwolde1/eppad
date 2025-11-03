@@ -7,7 +7,7 @@ const boardMembers = [
   {
     name: "Dr. Ermias Tilahun",
     position: "President",
-    image: "http://eppad1.eppad.org/wp-content/uploads/2025/08/dr-ermias.jpg",
+    image: "/ermias.jpg",
     bio: "Ermias Tilahun, MPH, PhD., brings over 15 years of experience in epidemiology, clinical research, and public health, academia, clinical healthcare, the pharmaceutical industry, non-profit organizations, and regulatory settings. Currently serving as an Epidemiologist at the FDA, he specializes in research methodology, clinical research management, data analysis, and public health education. With a Ph.D. in Pharmacoepidemiology, a Master's in Public Health (MPH), a B.Sc. in Physician Assistant Studies, and a Diploma in Crisis Management and Post-Conflict Rehabilitation, Dr. Ermias combines a strong academic foundation with hands-on expertise in drug safety, surveillance, and health outcomes research.",
     linkedin: "#",
     twitter: "#",
