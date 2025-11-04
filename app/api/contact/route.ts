@@ -12,21 +12,23 @@ export async function POST(req: Request) {
       )
     }
 
-    // Create transporter using your SMTP credentials
+    // Create transporter with debug enabled
     const transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST, // eppad.org
-      port: Number(process.env.SMTP_PORT), // 465
-      secure: true, // SSL
+      host: process.env.SMTP_HOST,
+      port: Number(process.env.SMTP_PORT),
+      secure: process.env.SMTP_PORT === "465", // true for 465, false for 587
       auth: {
-        user: process.env.SMTP_USER, // info@eppad.org
-        pass: process.env.SMTP_PASS, // email password from cPanel
+        user: process.env.SMTP_USER,
+        pass: process.env.SMTP_PASS,
       },
+      logger: true,       // logs info to console
+      debug: true,        // prints SMTP communication
     })
 
-    // Send email
-    await transporter.sendMail({
+    // Prepare the email
+    const mailOptions = {
       from: `"EPPAD Contact Form" <${process.env.SMTP_USER}>`,
-      to: process.env.SMTP_USER, // send to yourself
+      to: "daniwolde@gmail.com", // change temporarily to a Gmail for testing if needed
       subject: `New message from ${name} (${subject})`,
       html: `
         <h2>New Contact Message</h2>
@@ -36,13 +38,17 @@ export async function POST(req: Request) {
         <p><b>Message:</b></p>
         <p>${message}</p>
       `,
-    })
+    }
+
+    // Send email and log full response
+    const info = await transporter.sendMail(mailOptions)
+    console.log("Nodemailer info:", info)
 
     return NextResponse.json({ success: true })
-  } catch (error) {
+  } catch (error: any) {
     console.error("Error sending email:", error)
     return NextResponse.json(
-      { success: false, error: "Failed to send email. Please try again." },
+      { success: false, error: error.message || "Failed to send email." },
       { status: 500 }
     )
   }
