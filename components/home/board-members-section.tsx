@@ -55,7 +55,7 @@ const boardMembers = [
   {
     name: "Prof. Tesfaye Biftu",
     position: "Board Member",
-    image: "/Dr.-Tesfaye-Biftu.jpg",
+    image: "/Dr. Tesfaye Biftu.jpg",
     bio: "Dr. Tesfaye Biftu received his PhD from Brandeis University in chemistry and MBA from Rutgers University in management. He served at Merck and Co. as a Distinguished Senior Investigator and Director of Discovery Chemistry. Dr. Biftu has published over 70 manuscripts and is an inventor of over 65 US and international patents in various areas of drug discovery. He was the program lead in the discovery of Marizev™, the Once Weekly DPP-4 Inhibitor anti-diabetic agent, and key player in the Januvia™ project which has total sales over 70 billion since 2006. Currently, he serves as a Professor and Director of the Institute of Therapeutic Science at Adama University and teaches at Addis Ababa University, Ethiopia.",
     linkedin: "#",
     twitter: "#",
