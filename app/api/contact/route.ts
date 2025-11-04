@@ -1,58 +1,49 @@
-
 import { NextResponse } from "next/server"
 import nodemailer from "nodemailer"
 
-type Body = {
-  name: string
-  email: string
-  subject: string
-  message: string
-}
-
 export async function POST(req: Request) {
   try {
-    const body: Body = await req.json()
+    const { name, email, subject, message } = await req.json()
 
-    // basic server-side validation
-    if (!body?.name || !body?.email || !body?.subject || !body?.message) {
-      return NextResponse.json({ success: false, error: "Missing required fields" }, { status: 400 })
+    if (!name || !email || !subject || !message) {
+      return NextResponse.json(
+        { success: false, error: "All fields are required." },
+        { status: 400 }
+      )
     }
 
-    // Create transporter using env variables
+    // Create transporter using your SMTP credentials
     const transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST,
-      port: Number(process.env.SMTP_PORT || 465),
-      secure: process.env.SMTP_SECURE === "true" || true, // true for 465, false for 587 (STARTTLS)
+      host: process.env.SMTP_HOST, // eppad.org
+      port: Number(process.env.SMTP_PORT), // 465
+      secure: true, // SSL
       auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS,
+        user: process.env.SMTP_USER, // info@eppad.org
+        pass: process.env.SMTP_PASS, // email password from cPanel
       },
     })
 
-    const mailOptions = {
-      from: `"EPPAD Website" <${process.env.SMTP_FROM || process.env.SMTP_USER}>`,
-      to: process.env.CONTACT_RECEIVER || "info@eppad.org",
-      subject: `Website Contact — ${body.subject}`,
-      text: [
-        `Name: ${body.name}`,
-        `Email: ${body.email}`,
-        `Subject: ${body.subject}`,
-        "",
-        "Message:",
-        body.message,
-      ].join("\n"),
-      html: `<p><strong>Name:</strong> ${body.name}</p>
-             <p><strong>Email:</strong> ${body.email}</p>
-             <p><strong>Subject:</strong> ${body.subject}</p>
-             <hr/>
-             <p>${body.message.replace(/\n/g, "<br/>")}</p>`,
-    }
-
-    await transporter.sendMail(mailOptions)
+    // Send email
+    await transporter.sendMail({
+      from: `"EPPAD Contact Form" <${process.env.SMTP_USER}>`,
+      to: process.env.SMTP_USER, // send to yourself
+      subject: `New message from ${name} (${subject})`,
+      html: `
+        <h2>New Contact Message</h2>
+        <p><b>Name:</b> ${name}</p>
+        <p><b>Email:</b> ${email}</p>
+        <p><b>Subject:</b> ${subject}</p>
+        <p><b>Message:</b></p>
+        <p>${message}</p>
+      `,
+    })
 
     return NextResponse.json({ success: true })
-  } catch (err: any) {
-    console.error("API /api/contact error:", err)
-    return NextResponse.json({ success: false, error: err?.message || "Unknown error" }, { status: 500 })
+  } catch (error) {
+    console.error("Error sending email:", error)
+    return NextResponse.json(
+      { success: false, error: "Failed to send email. Please try again." },
+      { status: 500 }
+    )
   }
 }
