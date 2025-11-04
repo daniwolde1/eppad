@@ -24,6 +24,7 @@ type ContactFormData = z.infer<typeof contactSchema>
 export function ContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitSuccess, setSubmitSuccess] = useState(false)
+  const [submitError, setSubmitError] = useState<string | null>(null)
 
   const {
     register,
@@ -37,13 +38,31 @@ export function ContactForm() {
 
   const onSubmit = async (data: ContactFormData) => {
     setIsSubmitting(true)
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 2000))
-    console.log("Contact form submission:", data)
-    setIsSubmitting(false)
-    setSubmitSuccess(true)
-    reset()
-    setTimeout(() => setSubmitSuccess(false), 5000)
+    setSubmitError(null)
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      })
+
+      const body = await res.json()
+
+      if (!res.ok) {
+        console.error("Contact API error:", body)
+        setSubmitError(body?.error || "Failed to send message. Please try again later.")
+      } else {
+        setSubmitSuccess(true)
+        reset()
+        setTimeout(() => setSubmitSuccess(false), 5000)
+      }
+    } catch (err) {
+      console.error("Network error sending contact form:", err)
+      setSubmitError("Network error. Please try again later.")
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -56,6 +75,13 @@ export function ContactForm() {
             </p>
           </div>
         )}
+
+        {submitError && (
+          <div className="mb-4 rounded-lg border border-destructive/20 bg-destructive/5 p-4">
+            <p className="text-sm text-destructive">{submitError}</p>
+          </div>
+        )}
+
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
           <div className="space-y-2">
             <Label htmlFor="name">Name *</Label>
