@@ -36,7 +36,6 @@ export function ContactForm() {
     resolver: zodResolver(contactSchema),
   })
 
-  // ✅ Updated onSubmit: calls /api/contact backend
   const onSubmit = async (data: ContactFormData) => {
     setIsSubmitting(true)
     setSubmitError(null)
@@ -120,4 +119,18 @@ export function ContactForm() {
             {errors.message && <p className="text-sm text-destructive">{errors.message.message}</p>}
           </div>
 
-          <Button type="submit" cla
+          <Button type="submit" className="w-full bg-accent hover:bg-accent/90" size="lg" disabled={isSubmitting}>
+            {isSubmitting ? (
+              <>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                Sending Message...
+              </>
+            ) : (
+              "Send Message"
+            )}
+          </Button>
+        </form>
+      </CardContent>
+    </Card>
+  )
+}
