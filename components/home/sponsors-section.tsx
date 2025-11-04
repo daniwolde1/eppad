@@ -5,37 +5,37 @@ import Link from "next/link"
 const sponsors = [
   {
     name: "EPPAD Pharma",
-    logo: "http://eppad1.eppad.org/wp-content/uploads/2025/10/eppadpharma.png",
+    logo: "/eppadpharma.png",
     url: "https://eppadpharma.com/",
   },
   {
     name: "GSK",
-    logo: "http://eppad1.eppad.org/wp-content/uploads/2025/10/gsk.jpg",
+    logo: "/gsk.jpg",
     url: "https://www.gsk.com/en-gb/",
   },
   {
     name: "CVS Health",
-    logo: "http://eppad1.eppad.org/wp-content/uploads/2025/10/cvs.png",
+    logo: "/cvs.png",
     url: "https://www.cvshealth.com/",
   },
   {
     name: "Lion Healthcare",
-    logo: "http://eppad1.eppad.org/wp-content/uploads/2025/10/lion.png",
+    logo: "/lion.png",
     url: "https://lionhealthcare.ca/",
   },
   {
     name: "Howard University College of Pharmacy",
-    logo: "http://eppad1.eppad.org/wp-content/uploads/2025/10/haword-1.png",
+    logo: "/haword.png",
     url: "https://pharmacy.howard.edu/",
   },
   {
     name: "PerformRx",
-    logo: "http://eppad1.eppad.org/wp-content/uploads/2025/10/PERFORMX.png",
+    logo: "/PERFORMX.png",
     url: "https://www.performrx.com/",
   },
   {
     name: "RxParadigm",
-    logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-ZDHnRBPys9lYCo1ouWW6MItsvDIgmO.png",
+    logo: "/rx.png",
     url: "http://www.rxparadigm.com/",
   },
 ]
