@@ -1,34 +1,68 @@
-import { db } from "@/lib/db";
+import { useEffect, useState } from "react";
 
-export default async function InboxPage() {
-  const [rows] = await db.query("SELECT * FROM contacts ORDER BY created_at DESC");
+type Message = {
+  id: number;
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+  created_at: string;
+};
+
+export default function InboxPage() {
+  const [messages, setMessages] = useState<Message[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    async function fetchMessages() {
+      try {
+        const res = await fetch("/api/inbox");
+        const data = await res.json();
+
+        if (res.ok && data.success) {
+          setMessages(data.messages);
+        } else {
+          setError(data.error || "Failed to fetch messages");
+        }
+      } catch (err) {
+        setError("Network error. Please try again.");
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchMessages();
+  }, []);
+
+  if (loading) return <p className="p-4">Loading messages...</p>;
+  if (error) return <p className="p-4 text-red-500">{error}</p>;
 
   return (
-    <div className="p-10">
-      <h1 className="text-2xl font-bold mb-6">Inbox</h1>
-      <table className="w-full border">
-        <thead>
-          <tr className="bg-gray-200 text-left">
-            <th className="p-3 border">Name</th>
-            <th className="p-3 border">Email</th>
-            <th className="p-3 border">Message</th>
-            <th className="p-3 border">Date</th>
-          </tr>
-        </thead>
-        <tbody>
-          {Array.isArray(rows) &&
-            rows.map((row: any) => (
-              <tr key={row.id}>
-                <td className="p-3 border">{row.name}</td>
-                <td className="p-3 border">{row.email}</td>
-                <td className="p-3 border">{row.message}</td>
-                <td className="p-3 border">
-                  {new Date(row.created_at).toLocaleString()}
-                </td>
-              </tr>
-            ))}
-        </tbody>
-      </table>
+    <div className="p-6 space-y-4">
+      <h1 className="text-2xl font-bold mb-4">Inbox</h1>
+      {messages.length === 0 && <p>No messages found.</p>}
+
+      {messages.map((msg) => (
+        <div key={msg.id} className="border rounded-lg p-4 shadow-sm bg-white">
+          <p>
+            <strong>Name:</strong> {msg.name}
+          </p>
+          <p>
+            <strong>Email:</strong> {msg.email}
+          </p>
+          <p>
+            <strong>Subject:</strong> {msg.subject}
+          </p>
+          <p>
+            <strong>Message:</strong> {msg.message}
+          </p>
+          <p className="text-sm text-gray-500 mt-2">
+            <strong>Received:</strong>{" "}
+            {new Date(msg.created_at).toLocaleString()}
+          </p>
+        </div>
+      ))}
     </div>
   );
 }
