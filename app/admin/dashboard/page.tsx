@@ -2,51 +2,59 @@
 
 import { useState } from "react"
 
-// Import sibling pages correctly
+// Panel components (placeholders)
+import InboxPage from "../inbox/page"
 import UserManagerPage from "../user-manager/page"
-import ChangePasswordPage from "../change-password/page" // only if you create it later
+import ChangePasswordPage from "../change-password/page"
 
 export default function AdminDashboard() {
   const [activePanel, setActivePanel] = useState<"inbox" | "user-manager" | "change-password">("inbox")
 
   const renderPanel = () => {
     switch (activePanel) {
+      case "inbox":
+        return <InboxPage />
       case "user-manager":
         return <UserManagerPage />
       case "change-password":
         return <ChangePasswordPage />
-      case "inbox":
       default:
-        return <div>Inbox panel goes here</div>
+        return <div>Select a panel</div>
     }
   }
 
   return (
-    <div className="flex h-screen">
+    <div className="flex min-h-screen bg-gray-100">
       {/* Sidebar */}
-      <div className="w-64 bg-gray-100 p-4">
-        <h2 className="text-xl font-bold mb-4">Admin Dashboard</h2>
-        <ul className="space-y-2">
-          <li>
-            <button onClick={() => setActivePanel("inbox")} className="w-full text-left">
-              Inbox
-            </button>
-          </li>
-          <li>
-            <button onClick={() => setActivePanel("user-manager")} className="w-full text-left">
-              User Manager
-            </button>
-          </li>
-          <li>
-            <button onClick={() => setActivePanel("change-password")} className="w-full text-left">
-              Change Password
-            </button>
-          </li>
-        </ul>
-      </div>
+      <aside className="w-64 bg-white border-r border-gray-200 p-4">
+        <h2 className="text-2xl font-bold mb-6">Admin Dashboard</h2>
+        <nav className="space-y-2">
+          <button
+            className={`block w-full text-left px-3 py-2 rounded ${activePanel === "inbox" ? "bg-blue-500 text-white" : "hover:bg-gray-100"}`}
+            onClick={() => setActivePanel("inbox")}
+          >
+            Inbox
+          </button>
+          <button
+            className={`block w-full text-left px-3 py-2 rounded ${activePanel === "user-manager" ? "bg-blue-500 text-white" : "hover:bg-gray-100"}`}
+            onClick={() => setActivePanel("user-manager")}
+          >
+            User Manager
+          </button>
+          <button
+            className={`block w-full text-left px-3 py-2 rounded ${activePanel === "change-password" ? "bg-blue-500 text-white" : "hover:bg-gray-100"}`}
+            onClick={() => setActivePanel("change-password")}
+          >
+            Change Password
+          </button>
+          {/* Add more admin links here if needed */}
+        </nav>
+      </aside>
 
-      {/* Main panel */}
-      <div className="flex-1 p-6 overflow-auto">{renderPanel()}</div>
+      {/* Main Panel */}
+      <main className="flex-1 p-6">
+        {renderPanel()}
+      </main>
     </div>
   )
 }
