@@ -11,7 +11,7 @@ export async function GET() {
     });
 
     const [rows] = await connection.query(
-      "SELECT id, name, email, subject, message, created_at FROM contact_messages ORDER BY created_at DESC"
+      "SELECT id, name, email, subject, message, created_at FROM messages ORDER BY created_at DESC"
     );
 
     await connection.end();
