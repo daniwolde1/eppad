@@ -1,8 +1,15 @@
 import { NextResponse } from "next/server";
 import mysql from "mysql2/promise";
 
-export async function GET() {
+export async function POST(req: Request) {
   try {
+    const data = await req.json();
+    const { name, email, subject, message } = data;
+
+    if (!name || !email || !subject || !message) {
+      return NextResponse.json({ success: false, error: "Missing fields" }, { status: 400 });
+    }
+
     const connection = await mysql.createConnection({
       host: process.env.DB_HOST,
       user: process.env.DB_USER,
@@ -10,11 +17,16 @@ export async function GET() {
       database: process.env.DB_NAME,
     });
 
-    const [rows] = await connection.query("SELECT NOW() as now");
+    await connection.execute(
+      "INSERT INTO contact_messages (name, email, subject, message, created_at) VALUES (?, ?, ?, ?, NOW())",
+      [name, email, subject, message]
+    );
+
     await connection.end();
 
-    return NextResponse.json({ success: true, time: rows[0].now });
+    return NextResponse.json({ success: true });
   } catch (error: any) {
-    return NextResponse.json({ success: false, error: error.message });
+    console.error("Contact API error:", error);
+    return NextResponse.json({ success: false, error: error.message }, { status: 500 });
   }
 }
