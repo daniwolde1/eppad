@@ -15,6 +15,7 @@ export default function InboxPage() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [selectedMessage, setSelectedMessage] = useState<Message | null>(null);
 
   useEffect(() => {
     async function fetchMessages() {
@@ -37,34 +38,83 @@ export default function InboxPage() {
     fetchMessages();
   }, []);
 
-  if (loading) return <p className="p-4">Loading messages...</p>;
-  if (error) return <p className="p-4 text-red-500">{error}</p>;
+  if (loading) return <p className="p-6">Loading messages...</p>;
+  if (error) return <p className="p-6 text-red-500">{error}</p>;
 
   return (
-    <div className="p-6 space-y-4">
-      <h1 className="text-2xl font-bold mb-4">Inbox</h1>
-      {messages.length === 0 && <p>No messages found.</p>}
+    <div className="flex h-screen bg-gray-100">
+      {/* Sidebar */}
+      <aside className="w-64 bg-white border-r p-4 space-y-4">
+        <h2 className="text-xl font-bold mb-4">Folders</h2>
+        <ul className="space-y-2">
+          <li className="cursor-pointer hover:bg-gray-200 p-2 rounded">Inbox</li>
+          <li className="cursor-pointer hover:bg-gray-200 p-2 rounded">Sent</li>
+          <li className="cursor-pointer hover:bg-gray-200 p-2 rounded">Spam</li>
+          <li className="cursor-pointer hover:bg-gray-200 p-2 rounded">Junk</li>
+          <li className="cursor-pointer hover:bg-gray-200 p-2 rounded">Trash</li>
+          <li className="cursor-pointer hover:bg-gray-200 p-2 rounded">Drafts</li>
+        </ul>
+      </aside>
 
-      {messages.map((msg) => (
-        <div key={msg.id} className="border rounded-lg p-4 shadow-sm bg-white">
-          <p>
-            <strong>Name:</strong> {msg.name}
-          </p>
-          <p>
-            <strong>Email:</strong> {msg.email}
-          </p>
-          <p>
-            <strong>Subject:</strong> {msg.subject}
-          </p>
-          <p>
-            <strong>Message:</strong> {msg.message}
-          </p>
-          <p className="text-sm text-gray-500 mt-2">
-            <strong>Received:</strong>{" "}
-            {new Date(msg.created_at).toLocaleString()}
-          </p>
+      {/* Main content */}
+      <main className="flex-1 p-6 overflow-auto">
+        <h1 className="text-2xl font-bold mb-4">Inbox</h1>
+        {messages.length === 0 && <p>No messages found.</p>}
+
+        {/* Messages Table */}
+        <table className="min-w-full bg-white border border-gray-200 rounded-lg shadow">
+          <thead className="bg-gray-50">
+            <tr>
+              <th className="px-4 py-2 text-left border-b">From</th>
+              <th className="px-4 py-2 text-left border-b">Email</th>
+              <th className="px-4 py-2 text-left border-b">Subject</th>
+              <th className="px-4 py-2 text-left border-b">Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            {messages.map((msg) => (
+              <tr
+                key={msg.id}
+                className="hover:bg-gray-100 cursor-pointer"
+                onClick={() => setSelectedMessage(msg)}
+              >
+                <td className="px-4 py-2 border-b">{msg.name}</td>
+                <td className="px-4 py-2 border-b">{msg.email}</td>
+                <td className="px-4 py-2 border-b font-semibold text-blue-600">
+                  {msg.subject}
+                </td>
+                <td className="px-4 py-2 border-b">
+                  {new Date(msg.created_at).toLocaleString()}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </main>
+
+      {/* Message Modal */}
+      {selectedMessage && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg w-3/4 max-w-2xl p-6 relative">
+            <button
+              className="absolute top-3 right-3 text-gray-500 hover:text-gray-700 text-lg font-bold"
+              onClick={() => setSelectedMessage(null)}
+            >
+              ✕
+            </button>
+            <h2 className="text-xl font-bold mb-2">{selectedMessage.subject}</h2>
+            <p className="text-sm text-gray-500 mb-4">
+              From: {selectedMessage.name} ({selectedMessage.email})
+            </p>
+            <div className="border-t pt-2">
+              <p>{selectedMessage.message}</p>
+            </div>
+            <p className="text-xs text-gray-400 mt-4">
+              Received: {new Date(selectedMessage.created_at).toLocaleString()}
+            </p>
+          </div>
         </div>
-      ))}
+      )}
     </div>
   );
 }
