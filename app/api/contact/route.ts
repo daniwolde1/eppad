@@ -1,22 +1,20 @@
 import { NextResponse } from "next/server";
-import { db } from "@/lib/db";
+import mysql from "mysql2/promise";
 
-export async function POST(req: Request) {
+export async function GET() {
   try {
-    const { name, email, message } = await req.json();
+    const connection = await mysql.createConnection({
+      host: process.env.DB_HOST,
+      user: process.env.DB_USER,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_NAME,
+    });
 
-    if (!name || !email || !message) {
-      return NextResponse.json({ error: "All fields are required" }, { status: 400 });
-    }
+    const [rows] = await connection.query("SELECT NOW() as now");
+    await connection.end();
 
-    await db.query(
-      "INSERT INTO contacts (name, email, message, created_at) VALUES (?, ?, ?, NOW())",
-      [name, email, message]
-    );
-
-    return NextResponse.json({ success: true });
-  } catch (error) {
-    console.error("Database insert error:", error);
-    return NextResponse.json({ error: "Failed to save message" }, { status: 500 });
+    return NextResponse.json({ success: true, time: rows[0].now });
+  } catch (error: any) {
+    return NextResponse.json({ success: false, error: error.message });
   }
 }
