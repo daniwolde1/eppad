@@ -1,50 +1,50 @@
-"use client";
+"use client"
 
-import { useState, useEffect } from "react";
-import InboxPage from "../inbox/page"; // Import your existing inbox page
-import UserManagerPage from "./user-manager/page"; // We'll create next
-import ChangePasswordPage from "./change-password/page"; // We'll create next
-
-type Section = "inbox" | "users" | "change-password";
+import { useState } from "react"
+import UserManagerPage from "./user-manager/page"
 
 export default function AdminDashboard() {
-  const [section, setSection] = useState<Section>("inbox");
-
-  const username = "Admin"; // You can extract from JWT if needed
+  const [activePanel, setActivePanel] = useState<"user-manager" | "login">("user-manager")
 
   return (
     <div className="flex h-screen">
-      {/* Sidebar */}
-      <aside className="w-64 bg-gray-800 text-white p-4 space-y-4">
-        <h2 className="text-xl font-bold mb-6">Howdy, {username}!</h2>
+      {/* Left Panel */}
+      <nav className="w-64 bg-gray-100 p-4 border-r">
+        <h2 className="text-xl font-bold mb-6">Admin Dashboard</h2>
         <ul className="space-y-2">
-          <li
-            className="cursor-pointer hover:bg-gray-700 p-2 rounded"
-            onClick={() => setSection("inbox")}
-          >
-            Inbox
+          <li>
+            <button
+              className={`w-full text-left p-2 rounded ${
+                activePanel === "user-manager" ? "bg-blue-500 text-white" : "hover:bg-gray-200"
+              }`}
+              onClick={() => setActivePanel("user-manager")}
+            >
+              User Manager
+            </button>
           </li>
-          <li
-            className="cursor-pointer hover:bg-gray-700 p-2 rounded"
-            onClick={() => setSection("users")}
-          >
-            User Manager
-          </li>
-          <li
-            className="cursor-pointer hover:bg-gray-700 p-2 rounded"
-            onClick={() => setSection("change-password")}
-          >
-            Change Admin Password
+          <li>
+            <button
+              className={`w-full text-left p-2 rounded ${
+                activePanel === "login" ? "bg-blue-500 text-white" : "hover:bg-gray-200"
+              }`}
+              onClick={() => setActivePanel("login")}
+            >
+              Login Page
+            </button>
           </li>
         </ul>
-      </aside>
+      </nav>
 
       {/* Right Panel */}
-      <main className="flex-1 overflow-auto bg-gray-100 p-6">
-        {section === "inbox" && <InboxPage />}
-        {section === "users" && <UserManagerPage />}
-        {section === "change-password" && <ChangePasswordPage />}
+      <main className="flex-1 p-6 overflow-auto">
+        {activePanel === "user-manager" && <UserManagerPage />}
+        {activePanel === "login" && (
+          <div>
+            <h3 className="text-lg font-bold mb-4">Login Page</h3>
+            <p>Use this panel to log in as admin (or implement the login form here).</p>
+          </div>
+        )}
       </main>
     </div>
-  );
+  )
 }
