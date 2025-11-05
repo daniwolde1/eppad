@@ -18,7 +18,7 @@ export async function POST(req: Request) {
     });
 
     await connection.execute(
-      "INSERT INTO contact_messages (name, email, subject, message, created_at) VALUES (?, ?, ?, ?, NOW())",
+      "INSERT INTO messages (name, email, subject, message, created_at) VALUES (?, ?, ?, ?, NOW())",
       [name, email, subject, message]
     );
 
