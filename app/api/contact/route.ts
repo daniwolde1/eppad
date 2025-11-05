@@ -6,18 +6,19 @@ export async function POST(req: Request) {
     const { name, email, subject, message } = await req.json();
 
     // Nodemailer transporter (GoDaddy recommended for external apps)
-    const transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST,           // smtpout.secureserver.net
-      port: Number(process.env.SMTP_PORT),   // 587
-      secure: process.env.SMTP_SECURE === "true", // false for STARTTLS
-      auth: {
-        user: process.env.SMTP_USER,         // info@eppad.org
-        pass: process.env.SMTP_PASS,         // email password
-      },
-      tls: {
-        rejectUnauthorized: false,           // bypass certificate mismatch
-      },
-    });
+   const transporter = nodemailer.createTransport({
+  host: process.env.SMTP_HOST,           // smtpout.secureserver.net
+  port: Number(process.env.SMTP_PORT),   // 587
+  secure: process.env.SMTP_SECURE === "true", // false for STARTTLS
+  auth: {
+    user: process.env.SMTP_USER,         // info@eppad.org
+    pass: process.env.SMTP_PASS,         // the app password
+  },
+  tls: {
+    rejectUnauthorized: false,           // bypass cert mismatch
+  },
+});
+
 
     // Email message options
     const mailOptions = {
