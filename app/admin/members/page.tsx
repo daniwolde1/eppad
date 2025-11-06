@@ -26,15 +26,32 @@ interface Member {
 export default function MembersPage() {
   const [members, setMembers] = useState<Member[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  // Fetch members from DB
   const fetchMembers = async () => {
+    setLoading(true);
+    setError(null);
+
     try {
       const res = await fetch("/api/members");
+
+      if (!res.ok) {
+        throw new Error(`API returned status ${res.status}`);
+      }
+
       const data = await res.json();
+      console.log("Fetched members:", data);
+
+      // Defensive check: ensure data is an array
+      if (!Array.isArray(data)) {
+        throw new Error("API response is not an array");
+      }
+
       setMembers(data);
-    } catch (err) {
+    } catch (err: any) {
       console.error("Failed to fetch members", err);
+      setError(err.message || "Failed to load members");
+      setMembers([]);
     } finally {
       setLoading(false);
     }
@@ -46,20 +63,25 @@ export default function MembersPage() {
 
   const handleConfirm = async (id: number) => {
     if (!confirm("Are you sure you want to confirm this member?")) return;
+
     try {
       const res = await fetch(`/api/members/${id}/confirm`, { method: "POST" });
-      if (res.ok) {
-        alert("Member confirmed successfully!");
-        fetchMembers(); // Refresh list
-      } else {
-        alert("Failed to confirm member.");
+
+      if (!res.ok) {
+        throw new Error(`Failed with status ${res.status}`);
       }
-    } catch (err) {
+
+      alert("Member confirmed successfully!");
+      fetchMembers(); // Refresh list
+    } catch (err: any) {
       console.error(err);
+      alert(err.message || "Failed to confirm member.");
     }
   };
 
   if (loading) return <p className="text-center mt-6">Loading members...</p>;
+  if (error) return <p className="text-center mt-6 text-red-600">{error}</p>;
+  if (members.length === 0) return <p className="text-center mt-6">No members found.</p>;
 
   return (
     <Card className="max-w-6xl mx-auto mt-8">
@@ -82,16 +104,16 @@ export default function MembersPage() {
               <tr key={m.id} className="text-center">
                 <td className="border p-2">{i + 1}</td>
                 <td className="border p-2">
-                  {m.first_name} {m.last_name}
+                  {m.first_name || ""} {m.last_name || ""}
                 </td>
-                <td className="border p-2">{m.email}</td>
-                <td className="border p-2 capitalize">{m.membership_type}</td>
+                <td className="border p-2">{m.email || "-"}</td>
+                <td className="border p-2 capitalize">{m.membership_type || "-"}</td>
                 <td
                   className={`border p-2 font-semibold ${
                     m.status === "completed" ? "text-green-600" : "text-yellow-600"
                   }`}
                 >
-                  {m.status}
+                  {m.status || "pending"}
                 </td>
                 <td className="border p-2">
                   {m.status === "pending" ? (
