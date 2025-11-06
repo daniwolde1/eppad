@@ -1,6 +1,6 @@
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
-import { MembershipForm } from "@/components/membership/membership-form"
+import  MembershipForm  from "@/components/membership/membership-form"
 import { Check, GraduationCap, Users, BookOpen, Heart, Globe, Lightbulb } from "lucide-react"
 
 export default function MembershipPage() {
