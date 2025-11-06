@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { db } from "@/lib/db"; // ✅ when db.ts exports: export const db = ...
 
 export default function AdminLoginPage() {
   const router = useRouter();
