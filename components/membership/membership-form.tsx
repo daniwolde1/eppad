@@ -60,7 +60,10 @@ export default function MembershipPage() {
       console.log("Membership saved:", result);
 
       // Redirect to payment page with membershipId
-      window.location.href = `/payment-checkout?membershipId=${result.id}`;
+      //window.location.href = `/payment-checkout?membershipId=${result.id}`;
+      // Redirect to registration confirmation page
+window.location.href = "https://eppad1.eppad.org/register/";
+
     } catch (err) {
       console.error("Submission error:", err);
       alert("Error submitting application. Please try again.");
