@@ -93,7 +93,7 @@ export default function Conference2025Page() {
                       link.download = "EPPAD-Booklet.pdf"
                       link.click()
                     }}
-                    className="px-6 py-3 text-lg bg-primary text-white hover:bg-primary/90"
+                   className="px-6 py-3 text-lg bg-blue-600 text-white hover:bg-blue-700 transition"
                   >
                     Download Booklet
                   </Button>
