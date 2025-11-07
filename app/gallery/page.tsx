@@ -34,7 +34,7 @@ const galleryItems = [
       { url: "/mentorship-meeting.png", alt: "Mentorship meeting" },
       { url: "/mentors-and-mentees.jpg", alt: "Mentors and mentees" },
       { url: "/professional-development.jpg", alt: "Professional development" },
-      { url: "/co2.jpg", alt: "Networking event" },
+      { url: "/net2.jpg", alt: "Networking event" },
     ],
   },
   {
@@ -43,11 +43,11 @@ const galleryItems = [
     date: "February 2019",
     images: [
       {
-        url: "/ethiopian-embassy-symposium.jpg",
+        url: "/2019.jpg",
         alt: "Symposium at Ethiopian Embassy",
       },
-      { url: "/symposium-speakers.jpg", alt: "Distinguished speakers" },
-      { url: "/symposium-attendees.jpg", alt: "110 participants" },
+      { url: "/inaguration.JPEG", alt: "Distinguished speakers" },
+      { url: "/enag3.JPEG", alt: "110 participants" },
       { url: "/celebrate.jpg", alt: "Working group formation" },
     ],
   },
