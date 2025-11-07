@@ -79,7 +79,7 @@ export default function Conference2025Page() {
                     </div>
                   </div>
                 </div>
-"use client"
+
 
 export default function Page() {
   return (
