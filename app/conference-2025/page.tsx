@@ -86,17 +86,18 @@ export default function Conference2025Page() {
 
                 {/* ✅ Download Button */}
                 <div className="mb-10 text-center">
-                <Button
+               <Button
   onClick={() => {
     const link = document.createElement("a")
     link.href = "https://www.eppad.org/booklet3.pdf"
     link.download = "EPPAD-Booklet.pdf"
     link.click()
   }}
-  className="px-6 py-3 text-lg bg-green-800 text-white hover:bg-green-700 transition rounded-lg"
+  className="px-6 py-3 text-lg bg-primary text-primary-foreground hover:bg-primary/90 transition"
 >
   Download Booklet
 </Button>
+
 
 
                 </div>
