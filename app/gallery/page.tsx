@@ -22,8 +22,8 @@ const galleryItems = [
     images: [
       { url: "/health-fair-screening.jpg", alt: "Health screening" },
       { url: "/health-fair-volunteers.jpg", alt: "Volunteers" },
-      { url: "/health-fair-community.jpg", alt: "Community members" },
-      { url: "/health-fair-education.jpg", alt: "Health education" },
+      { url: "/comu3.JPEG", alt: "Community members" },
+      { url: "/comu4.jpg", alt: "Health education" },
     ],
   },
   {
@@ -31,7 +31,7 @@ const galleryItems = [
     title: "Mentorship Program Launch",
     date: "June 2024",
     images: [
-      { url: "/mentorship-meeting.png", alt: "Mentorship meeting" },
+      { url: "/net4.jpg", alt: "Mentorship meeting" },
       { url: "/mentors-and-mentees.jpg", alt: "Mentors and mentees" },
       { url: "/professional-development.jpg", alt: "Professional development" },
       { url: "/net2.jpg", alt: "Networking event" },
