@@ -79,7 +79,28 @@ export default function Conference2025Page() {
                     </div>
                   </div>
                 </div>
+"use client"
 
+export default function Page() {
+  return (
+    <div className="flex flex-col items-center justify-center min-h-screen">
+      <h1 className="text-2xl font-semibold mb-4">Download Our Booklet</h1>
+
+      <a
+        href="https://www.eppad.org/booklet3.pdf"
+        download
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <Button className="px-6 py-3 text-lg">
+          Download Booklet
+        </Button>
+      </a>
+    </div>
+  )
+}
+
+                
                 {/* Lineup Section */}
                 <div className="border-t border-border pt-8 mb-8">
                   <div className="flex items-center gap-2 mb-6">
