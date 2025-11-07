@@ -34,7 +34,7 @@ const galleryItems = [
       { url: "/mentorship-meeting.png", alt: "Mentorship meeting" },
       { url: "/mentors-and-mentees.jpg", alt: "Mentors and mentees" },
       { url: "/professional-development.jpg", alt: "Professional development" },
-      { url: "/networking-event.png", alt: "Networking event" },
+      { url: "/co2.jpg", alt: "Networking event" },
     ],
   },
   {
@@ -48,7 +48,7 @@ const galleryItems = [
       },
       { url: "/symposium-speakers.jpg", alt: "Distinguished speakers" },
       { url: "/symposium-attendees.jpg", alt: "110 participants" },
-      { url: "/working-group-formation.jpg", alt: "Working group formation" },
+      { url: "/celebrate.jpg", alt: "Working group formation" },
     ],
   },
 ]
