@@ -139,28 +139,11 @@ export function DonationForm() {
             {errors.designation && <p className="text-sm text-destructive">{errors.designation.message}</p>}
           </div>
 
-          {/* Donor Information */}
-          <div className="space-y-4">
-            <h3 className="font-display text-lg font-semibold text-foreground">Donor Information</h3>
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-              <div className="space-y-2">
-                <Label htmlFor="firstName">First Name *</Label>
-                <Input id="firstName" {...register("firstName")} />
-                {errors.firstName && <p className="text-sm text-destructive">{errors.firstName.message}</p>}
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="lastName">Last Name *</Label>
-                <Input id="lastName" {...register("lastName")} />
-                {errors.lastName && <p className="text-sm text-destructive">{errors.lastName.message}</p>}
-              </div>
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="email">Email *</Label>
-              <Input id="email" type="email" {...register("email")} />
-              {errors.email && <p className="text-sm text-destructive">{errors.email.message}</p>}
-            </div>
-          </div>
+          
 
+          
+
+          
           <div className="rounded-lg border border-border bg-muted/30 p-4">
             <p className="text-sm text-muted-foreground">
               <strong>Secure Payment:</strong> After clicking "Proceed to Payment", you will be redirected to our secure
