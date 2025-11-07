@@ -26,7 +26,6 @@ type DonationFormData = z.infer<typeof donationSchema>
 
 export function DonationForm() {
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const [submitSuccess, setSubmitSuccess] = useState(false)
   const [customAmount, setCustomAmount] = useState(false)
 
   const {
@@ -43,38 +42,18 @@ export function DonationForm() {
   })
 
   const selectedAmount = watch("amount")
-  const donationType = watch("donationType")
-
   const predefinedAmounts = ["25", "50", "100", "250", "500", "1000"]
 
   const onSubmit = async (data: DonationFormData) => {
     setIsSubmitting(true)
-    await new Promise((resolve) => setTimeout(resolve, 2000))
-    console.log("Donation:", data)
-    setIsSubmitting(false)
-    setSubmitSuccess(true)
-  }
 
-  if (submitSuccess) {
-    return (
-      <Card className="border-primary/20 bg-primary/5">
-        <CardContent className="pt-6">
-          <div className="text-center">
-            <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
-              <Heart className="h-8 w-8 text-primary fill-primary" />
-            </div>
-            <h3 className="font-display text-2xl font-bold text-foreground mb-2">Thank You for Your Generosity!</h3>
-            <p className="text-muted-foreground mb-6">
-              Your donation of ${selectedAmount} will make a meaningful difference in supporting Ethiopian
-              pharmaceutical professionals. You will receive a confirmation email shortly.
-            </p>
-            <Button onClick={() => setSubmitSuccess(false)} variant="outline">
-              Make Another Donation
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
-    )
+    // Simulate loading delay (optional)
+    await new Promise((resolve) => setTimeout(resolve, 1000))
+
+    console.log("Donation data:", data)
+
+    // ✅ Redirect to the external donation page
+    window.location.href = "https://eppad1.eppad.org/donation/"
   }
 
   return (
