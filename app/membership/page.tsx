@@ -59,7 +59,7 @@ export default function MembershipPage() {
   const membershipTiers = [
     {
       name: "Student Member",
-      price: "$10/year",
+      price: "$25/year",
       description: "For pharmacy students and residents",
       features: [
         "Full access to educational events",
@@ -70,7 +70,7 @@ export default function MembershipPage() {
     },
     {
       name: "Professional Member",
-      price: "$60/year",
+      price: "$75/year",
       description: "For practicing pharmacists and pharmaceutical scientists",
       features: [
         "All student member benefits",
