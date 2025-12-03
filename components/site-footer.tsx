@@ -42,7 +42,7 @@ export function SiteFooter() {
               <div className="flex items-center gap-2 text-sm text-white/80">
                 <Phone className="h-4 w-4" />
                 <a href="tel:3016753384" className="hover:text-white transition-colors">
-                  (301) 675 3384
+                 ----
                 </a>
               </div>
               <div className="flex items-center gap-2 text-sm text-white/80">
