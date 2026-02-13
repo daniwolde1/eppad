@@ -77,7 +77,7 @@ export default function ScholarshipPage() {
                 <div className="md:col-span-1">
                   <div className="relative aspect-[3/4] w-full max-w-xs mx-auto rounded-lg overflow-hidden shadow-lg">
                     <Image
-                      src="https://eppad.org/images/Tesfaye.jpg"
+                      src="/Dr. Tesfaye Biftu.jpg"
                       alt="Dr. Tesfaye Biftu"
                       fill
                       className="object-cover object-[center_20%]"
