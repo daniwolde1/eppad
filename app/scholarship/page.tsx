@@ -168,7 +168,7 @@ export default function ScholarshipPage() {
               <h2 className="font-display text-3xl font-bold text-foreground mb-8 text-center">Application Deadline</h2>
               <div className="rounded-lg border border-border bg-card p-8 text-center mb-12">
                 <Calendar className="h-12 w-12 text-accent mx-auto mb-4" />
-                <h3 className="font-display text-2xl font-semibold text-foreground mb-2"> April 1, 2026</h3>
+                <h3 className="font-display text-2xl font-semibold text-foreground mb-2">April 1, 2026</h3>
                 <p className="text-base text-muted-foreground">11:59 PM EST</p>
               </div>
 
