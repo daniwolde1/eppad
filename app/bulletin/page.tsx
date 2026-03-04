@@ -5,6 +5,14 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button"
 
 const bulletins = [
+   {
+    id: 0,
+    title: "EPPAD Bulletin Vol. 5, No. 2",
+    date: "September 2025",
+    volume: "Vol. 5, No. 2",
+    pdfUrl: "/september2025.pdf",
+    coverImage: "/bulletin-covers/september2025.png",
+  },
   {
     id: 1,
     title: "EPPAD Bulletin Vol. 5, No. 1",
