@@ -5,8 +5,16 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button"
 
 const bulletins = [
-   {
+    {
     id: 0,
+    title: "EPPAD Bulletin Vol. 6, No. 1",
+    date: "March 2026",
+    volume: "Vol. 6, No. 6",
+    pdfUrl: "/march2026.pdf",
+    coverImage: "/bulletin-covers/march2026.png",
+  },
+   {
+    id: 1,
     title: "EPPAD Bulletin Vol. 5, No. 2",
     date: "September 2025",
     volume: "Vol. 5, No. 2",
@@ -14,7 +22,7 @@ const bulletins = [
     coverImage: "/bulletin-covers/september2025.png",
   },
   {
-    id: 1,
+    id: 2,
     title: "EPPAD Bulletin Vol. 5, No. 1",
     date: "March 2025",
     volume: "Vol. 5, No. 1",
@@ -22,7 +30,7 @@ const bulletins = [
     coverImage: "/bulletin-covers/vol5-no1-march-2025.png",
   },
   {
-    id: 2,
+    id: 3,
     title: "EPPAD Bulletin Vol. 4, No. 2",
     date: "September 2024",
     volume: "Vol. 4, No. 2",
@@ -30,7 +38,7 @@ const bulletins = [
     coverImage: "/bulletin-covers/vol4-no2-september-2024.png",
   },
   {
-    id: 3,
+    id: 4,
     title: "EPPAD Bulletin Vol. 4, No. 1",
     date: "March 2024",
     volume: "Vol. 4, No. 1",
@@ -38,7 +46,7 @@ const bulletins = [
     coverImage: "/bulletin-covers/vol4-no1-march-2024.png",
   },
   {
-    id: 4,
+    id: 5,
     title: "EPPAD Bulletin Vol. 3, No. 2",
     date: "September 2023",
     volume: "Vol. 3, No. 2",
@@ -46,7 +54,7 @@ const bulletins = [
     coverImage: "/bulletin-covers/vol3-no2-september-2023.png",
   },
   {
-    id: 5,
+    id: 6,
     title: "EPPAD Bulletin Vol. 3, No. 1",
     date: "March 2023",
     volume: "Vol. 3, No. 1",
@@ -54,7 +62,7 @@ const bulletins = [
     coverImage: "/bulletin-covers/vol3-no1-march-2023.png",
   },
   {
-    id: 6,
+    id: 7,
     title: "EPPAD Bulletin Vol. 2, No. 2",
     date: "September 2022",
     volume: "Vol. 2, No. 2",
@@ -62,7 +70,7 @@ const bulletins = [
     coverImage: "/bulletin-covers/vol2-no2-september-2022.png",
   },
   {
-    id: 7,
+    id: 8,
     title: "EPPAD Bulletin Vol. 2, No. 1",
     date: "March 2022",
     volume: "Vol. 2, No. 1",
@@ -70,7 +78,7 @@ const bulletins = [
     coverImage: "/bulletin-covers/vol2-no1-march-2022.png",
   },
   {
-    id: 8,
+    id: 9,
     title: "EPPAD 1st Bulletin",
     date: "September 2021",
     volume: "Vol. 1",
