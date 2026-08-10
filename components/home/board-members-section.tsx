@@ -36,14 +36,7 @@ const boardMembers = [
     linkedin: "#",
     twitter: "#",
   },
-  {
-    name: "Dr. Alemayehu Akalu",
-    position: "Board Member",
-    image: "/dr.alex.png",
-    bio: "Dr. Alex Akalu is a pharmacist-scientist with over 15 years of experience blending science, regulation, and technology. With a foundation in physics, he specializes in regulatory science, pediatric oncology, and applied artificial intelligence (AI) in healthcare. He currently serves as a Senior Oncology Staff Fellow at the U.S. Food and Drug Administration (FDA), leading data analysis, clinical research, and AI integration for the Division of Pediatric Oncology. Dr. Akalu was instrumental in developing the Pediatric Molecular Target List, a globally utilized resource guiding pediatric cancer drug development. His peer-reviewed research has been published in JAMA Oncology, Pediatric Blood & Cancer, and The Journal of Clinical Oncology.",
-    linkedin: "#",
-    twitter: "#",
-  },
+ 
   {
     name: "Dr. Fekadu Fullas",
     position: "Board Member",
